@@ -1,7 +1,10 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
         int left = 1;
-        int right = Arrays.stream(piles).max().getAsInt();
+        int right = 0;
+        for (int pile : piles) {
+            if (pile > right) right = pile;
+        }
         int k = 0;
         int mid = 0;
         while (left <= right) {
@@ -9,7 +12,7 @@ class Solution {
             if (canEat(mid, piles, h) == true) {
                 k = mid;
                 right = mid  - 1;
-            } else if (canEat(mid, piles, h) == false) {
+            } else {
                 left = mid + 1;
             }
         }
